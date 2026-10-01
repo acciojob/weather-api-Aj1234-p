@@ -4,7 +4,7 @@ const accessKey = `f72935cc48f386b9bec1acb800edc03e`
 checkWeather.addEventListener('click',(e)=>{
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=${accessKey}`)
   .then(resp=>{
-    if(!resp.ok) throw new Error(`Weather could not be found for your location ${resp.status}`);
+    if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
     return resp.json();
   })
   .then(data=>{
@@ -12,5 +12,6 @@ checkWeather.addEventListener('click',(e)=>{
   })
   .catch(err=>{
     console.log("error ",err.message);
+	  shownWeatherData.textContent = `Weather could not be found for your location ${err.message}`;
   })
 })
